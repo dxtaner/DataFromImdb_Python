@@ -12,18 +12,26 @@ soup=BeautifulSoup(htmlicerigi,"html.parser")
 basliklar=soup.findAll("td",{"class":"titleColumn"})
 ratingler=soup.findAll("td",{"class":"ratingColumn imdbRating"})
 
-deger=float(input("rating girin:"))
+while True:
+    altdeger=float(input("alt rating girin (0-10) :"))
+    ustdeger=float(input("alt degerin üzerinde deger girininz ust rating girin (0-10): "))
 
-for baslik,rating in zip(basliklar,ratingler):
-    baslik=baslik.text
-    baslik=baslik.strip()
-    baslik=baslik.replace("\n","")
-    rating=rating.text
-    rating=rating.strip()
-    rating=rating.replace("\n","")
+    if(altdeger<ustdeger):
+        for baslik, rating in zip(basliklar, ratingler):
+            baslik = baslik.text
+            baslik = baslik.strip()
+            baslik = baslik.replace("\n", "")
+            rating = rating.text
+            rating = rating.strip()
+            rating = rating.replace("\n", "")
 
-    if(float(rating)>deger):
-        print("film ismi: {} film rating: {}".format(baslik,rating))
+            if (float(rating) > altdeger and float(rating) < ustdeger):
+                print("film ismi: {} film rating: {}".format(baslik, rating))
+        print("\n")
+    else:
+        print("Tekrar deneyin")
+
+
 
 
 
